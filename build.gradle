@@ -6,6 +6,26 @@ task wrapper(type: Wrapper) {
 
 apply plugin: 'base'
 
+allprojects {
+    group = 'demo'
+
+    apply plugin: 'idea'
+    apply from: "$rootDir/gradle/repositories.gradle"
+}
+
+subprojects {
+    apply plugin: 'java'
+
+    apply from: "$rootDir/gradle/repositories.gradle"
+
+    apply from: "$rootDir/gradle/providedScope.gradle"
+    apply from: "$rootDir/gradle/dependencies.gradle"
+    apply from: "$rootDir/gradle/compiler.gradle"
+    apply from: "$rootDir/gradle/test.gradle"
+    apply from: "$rootDir/gradle/idea.gradle"
+
+}
+
 idea {
     project {
         languageLevel = '1.8'

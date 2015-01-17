@@ -1,0 +1,15 @@
+apply plugin: 'idea'
+
+idea {
+    module {
+        scopes.PROVIDED.plus += [configurations.provided]
+
+        inheritOutputDirs = false
+        outputDir = file("$buildDir/classes/main")
+        testOutputDir = file("$buildDir/classes/test")
+        downloadJavadoc = true
+        downloadSources = true
+
+        excludeDirs += file("$rootDir/build")
+    }
+}

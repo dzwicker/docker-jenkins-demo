@@ -1,0 +1,12 @@
+def defaultEncoding = 'UTF-8'
+ext.defaultEncoding = defaultEncoding
+ext {
+    sourceCompatibility = JavaVersion.VERSION_1_8
+    targetCompatibility = JavaVersion.VERSION_1_8
+}
+compileJava {
+    options.encoding = defaultEncoding
+}
+compileTestJava {
+    options.encoding = defaultEncoding
+}

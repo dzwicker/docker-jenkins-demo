@@ -1,0 +1,36 @@
+ext {
+    CDI_VERSION = '1.2'
+    resteasy_version = '3.0.10.Final'
+    jackson_version = '2.4.1'
+    slf4j_version = '1.7.2'
+    jcabi_log_version = '0.15.1'
+    swagger_jaxrs_2_10_version = '1.3.11'
+
+    libraries = [
+            'servlet-api'                   : [group: 'org.jboss.spec.javax.servlet', name: 'jboss-servlet-api_3.1_spec', version: '1.0.0.Final'],
+            'validation-api'                : [group: 'javax.validation', name: 'validation-api', version: '1.1.0.Final'],
+            'hibernate-validator'           : dependencies.create(group: 'org.hibernate', name: 'hibernate-validator', version: '5.1.3.Final') {
+                //FIXME intellij bug
+                exclude(module: 'jboss-logging')
+            },
+            'jaxrs-api'                     : [group: 'org.jboss.resteasy', name: 'jaxrs-api', version: resteasy_version],
+            'resteasy-jaxrs'                : [group: 'org.jboss.resteasy', name: 'resteasy-jaxrs', version: resteasy_version],
+            'resteasy-jackson2'             : [group: 'org.jboss.resteasy', name: 'resteasy-jackson2-provider', version: resteasy_version],
+            'resteasy-validator-provider-11': [group: 'org.jboss.resteasy', name: 'resteasy-validator-provider-11', version: resteasy_version],
+            'jackson-databind'              : [group: 'com.fasterxml.jackson.core', name: 'jackson-databind', version: jackson_version],
+    ]
+}
+
+dependencies {
+    provided group: 'org.slf4j', name: 'slf4j-api', version: slf4j_version
+    provided(group: 'javax.enterprise', name: 'cdi-api', version: CDI_VERSION) {
+        exclude(module: 'jboss-interceptor-api')
+        exclude(module: 'jsr250-api')
+    }
+    provided libraries.'validation-api'
+    provided libraries.'hibernate-validator'
+
+    testCompile group: 'junit', name: 'junit', version: '4.11'
+    testCompile group: 'org.mockito', name: 'mockito-core', version: '1.10.13'
+    testCompile group: 'org.hamcrest', name: 'hamcrest-all', version: '1.3'
+}
