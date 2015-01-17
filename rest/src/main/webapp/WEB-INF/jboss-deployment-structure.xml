@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<jboss-deployment-structure xmlns="urn:jboss:deployment-structure:1.2">
+    <deployment>
+        <exclusions>
+            <module name="org.jboss.resteasy.resteasy-jettison-provider"/>
+            <module name="org.jboss.resteasy.resteasy-jackson-provider"/>
+        </exclusions>
+        <dependencies>
+            <module name="com.fasterxml.jackson.jaxrs.jackson-jaxrs-json-provider" services="import"/>
+            <module name="org.jboss.resteasy.resteasy-jackson2-provider" services="import"/>
+            <module name="org.jboss.resteasy.resteasy-validator-provider-11" services="none"/>
+            <module name="org.dom4j"/>
+        </dependencies>
+    </deployment>
+</jboss-deployment-structure>

@@ -1,0 +1,37 @@
+defaultTasks 'clean', 'test', 'assemble'
+
+task wrapper(type: Wrapper) {
+    gradleVersion = '2.2.1'
+}
+
+apply plugin: 'base'
+
+allprojects {
+    group = 'demo'
+
+    apply plugin: 'idea'
+    apply from: "$rootDir/gradle/repositories.gradle"
+}
+
+subprojects {
+    apply plugin: 'java'
+
+    apply from: "$rootDir/gradle/repositories.gradle"
+
+    apply from: "$rootDir/gradle/providedScope.gradle"
+    apply from: "$rootDir/gradle/dependencies.gradle"
+    apply from: "$rootDir/gradle/compiler.gradle"
+    apply from: "$rootDir/gradle/test.gradle"
+    apply from: "$rootDir/gradle/idea.gradle"
+
+}
+
+idea {
+    project {
+        languageLevel = '1.8'
+    }
+    module {
+        excludeDirs += file("$rootDir/.gradle")
+        excludeDirs += file("$rootDir/.idea")
+    }
+}

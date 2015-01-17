@@ -1,0 +1,4 @@
+test {
+    systemProperty 'user.language', 'en'
+//        testLogging.showStandardStreams = true
+}
