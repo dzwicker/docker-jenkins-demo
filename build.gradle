@@ -1,0 +1,17 @@
+defaultTasks 'clean', 'test', 'assemble'
+
+task wrapper(type: Wrapper) {
+    gradleVersion = '2.2.1'
+}
+
+apply plugin: 'base'
+
+idea {
+    project {
+        languageLevel = '1.8'
+    }
+    module {
+        excludeDirs += file("$rootDir/.gradle")
+        excludeDirs += file("$rootDir/.idea")
+    }
+}
