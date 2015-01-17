@@ -1,0 +1,27 @@
+apply plugin: 'war'
+
+description = 'Docker Jenkins Demo REST Webapp'
+
+dependencies {
+    compile(group: 'com.wordnik', name: 'swagger-jaxrs_2.10', version: swagger_jaxrs_2_10_version) {
+        exclude(module: 'slf4j-api')
+        exclude(module: 'joda-time')
+        exclude(module: 'jsr311-api')
+        exclude(group: 'com.fasterxml.jackson.core')
+        exclude(group: 'com.fasterxml.jackson.module')
+        exclude(group: 'com.fasterxml.jackson.jaxrs')
+        exclude(group: 'org.mockito')
+        exclude(group: 'commons-lang')
+        exclude(group: 'dom4j')
+    }
+
+    provided libraries.'servlet-api'
+    provided libraries.'jaxrs-api'
+    provided libraries.'resteasy-jaxrs'
+    provided libraries.'resteasy-jackson2'
+    provided libraries.'resteasy-validator-provider-11'
+}
+
+war {
+    classpath = classpath - [project.configurations.provided]
+}

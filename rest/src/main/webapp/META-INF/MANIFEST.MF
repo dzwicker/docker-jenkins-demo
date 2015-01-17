@@ -1,0 +1,8 @@
+Manifest-Version: 1.0
+Implementation-Title: Docker Jnekins Demo
+build-tag: ${build_tag}
+build-number: ${build_number}
+build-tstamp: ${buildTimestamp}
+git-hash: ${commit}
+fullversion: ${project_version}
+
