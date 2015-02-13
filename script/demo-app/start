@@ -2,4 +2,4 @@
 
 root="$(cd `dirname $0`/../.. && pwd)"
 
-"${root}/script/.build/start" "wildfly"
+"${root}/script/.build/start" "demo-app"
