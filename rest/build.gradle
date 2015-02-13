@@ -22,6 +22,13 @@ dependencies {
     provided libraries.'resteasy-validator-provider-11'
 }
 
+clean {
+    delete "${rootDir}/etc/demo-pp/artefacts"
+}
+
 war {
+    manifest {
+        from manifestPath
+    }
     classpath = classpath - [project.configurations.provided]
 }

@@ -10,7 +10,7 @@ import javax.ws.rs.core.MediaType;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
-import demo.model.RestDemo;
+import demo.model.Demo;
 import demo.services.DemoService;
 import com.wordnik.swagger.annotations.Api;
 import com.wordnik.swagger.annotations.ApiOperation;
@@ -33,9 +33,9 @@ public class RestDemoService {
 	@ApiResponses({
 			@ApiResponse(code = 200, message = "OK"),
 	})
-	public RestDemo get() {
+	public Demo get() {
 		log("fetch");
-		return new RestDemo(
+		return new Demo(
 				service.fetchCounter()
 		);
 	}
@@ -47,9 +47,9 @@ public class RestDemoService {
 	@ApiResponses({
 			@ApiResponse(code = 200, message = "OK"),
 	})
-	public RestDemo post() {
+	public Demo post() {
 		log("increase");
-		return new RestDemo(
+		return new Demo(
 				service.fetchAndIncreaseCounter()
 		);
 	}

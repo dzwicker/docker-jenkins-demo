@@ -1,5 +1,6 @@
 defaultTasks 'clean', 'test', 'assemble'
 
+
 task wrapper(type: Wrapper) {
     gradleVersion = '2.2.1'
 }
@@ -8,6 +9,7 @@ apply plugin: 'base'
 
 allprojects {
     group = 'demo'
+    version = '1.0.0'
 
     apply plugin: 'idea'
     apply from: "$rootDir/gradle/repositories.gradle"
@@ -20,6 +22,8 @@ subprojects {
 
     apply from: "$rootDir/gradle/providedScope.gradle"
     apply from: "$rootDir/gradle/dependencies.gradle"
+    apply from: "$rootDir/gradle/filter.gradle"
+    apply from: "$rootDir/gradle/manifest.gradle"
     apply from: "$rootDir/gradle/compiler.gradle"
     apply from: "$rootDir/gradle/test.gradle"
     apply from: "$rootDir/gradle/idea.gradle"
