@@ -1,0 +1,9 @@
+#!/bin/bash -eu
+
+root="$(cd `dirname $0`/../.. && pwd)"
+
+version_tag="dzwicker/wildfly:$(cat "${root}/script/widlfy/version")"
+latest_tag="dzwicker/wildfly:latest"
+
+docker push "${version_tag}"
+docker push "${latest_tag}"
