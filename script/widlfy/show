@@ -1,7 +1,3 @@
 #!/bin/bash -eu
 
-root="$(cd `dirname $0`/../.. && pwd)"
-
-version_tag="dzwicker/wildfly:$(cat "${root}/script/widlfy/version")"
-
-docker run -ti --net="host" "${version_tag}"
+open http://$(boot2docker ip):8080
