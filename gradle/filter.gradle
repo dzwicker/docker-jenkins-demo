@@ -1,0 +1,20 @@
+def cmd = "git log --pretty=format:%h -n 1"
+def result = cmd.execute()
+ext {
+    buildTimestamp = new Date().format('yyyy-MM-dd HH:mm:ss')
+    commit = result.text.trim()
+}
+
+Map<String, String> filters = [
+        project_version: version,
+        build_tag      : 'DEV_TAG',
+        build_number   : '0815',
+        buildTimestamp : buildTimestamp,
+        commit         : commit
+]
+
+processResources {
+    filesMatching('META-INF/MANIFEST.MF') {
+        expand filters
+    }
+}

@@ -1,3 +1,5 @@
 #!/bin/bash -eu
 
-open http://$(boot2docker ip):8080
+root="$(cd `dirname $0`/../.. && pwd)"
+
+"${root}/script/.build/show"

@@ -2,4 +2,6 @@
 
 root="$(cd `dirname $0`/../.. && pwd)"
 
-"${root}/script/.build/publish" "wildfly"
+(cd ${root}
+    ./gradlew $* --stacktrace
+)

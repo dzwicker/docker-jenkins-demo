@@ -2,11 +2,11 @@ package demo.model;
 
 import com.google.common.base.Objects;
 
-public class RestDemo {
+public class Demo {
 
 	private int counter;
 
-	public RestDemo(final int counter) {
+	public Demo(final int counter) {
 		this.counter = counter;
 	}
 
@@ -23,11 +23,11 @@ public class RestDemo {
 		if (this == o) {
 			return true;
 		}
-		if (!(o instanceof RestDemo)) {
+		if (!(o instanceof Demo)) {
 			return false;
 		}
 
-		final RestDemo restDemo = (RestDemo) o;
+		final Demo restDemo = (Demo) o;
 
 		if (counter != restDemo.counter) {
 			return false;

@@ -1,0 +1,6 @@
+ext.manifestPath = file("$buildDir/resources/main/META-INF/MANIFEST.MF")
+jar {
+    manifest {
+        from manifestPath
+    }
+}
