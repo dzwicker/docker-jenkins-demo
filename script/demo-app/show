@@ -2,4 +2,4 @@
 
 root="$(cd `dirname $0`/../.. && pwd)"
 
-"${root}/script/.build/show"
+"${root}/script/.build/show" "api/doc"
