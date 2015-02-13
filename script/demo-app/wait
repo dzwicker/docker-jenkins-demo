@@ -1,0 +1,13 @@
+#!/bin/bash -u
+
+root="$(cd `dirname $0`/../.. && pwd)"
+
+for i in {1..60}; do
+    response=$(curl -4 -H "Accept: application/json" --write-out %{http_code} --silent --output /dev/null "http://$(boot2docker ip):8080/api/v1/system/version")
+#    echo "Return code: ${response}"
+    echo -n .
+    if [ ${response} == 200 ]; then
+        exit 0
+    fi
+    sleep 1
+done
