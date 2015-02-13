@@ -1,0 +1,39 @@
+#!/bin/bash -eu
+
+root="$(cd `dirname $0`/../.. && pwd)"
+
+url="http://$(boot2docker ip):8080/api/v1/demo"
+restDir="${root}/tests/rest"
+
+expectedDir="${restDir}/expected"
+actualDir="${restDir}/actual"
+
+rm -rf "${actualDir}"
+mkdir -p "${actualDir}"
+mkdir -p "${expectedDir}"
+
+function fetchUrl() {
+    local -r i="$1"
+    local -r line="curl -4 ${url}$2"
+    local -r outfile="${actualDir}/${i}"
+
+    echo -n "${i}: Executing ${line}..."
+
+    echo "$line" > "$outfile"
+
+    eval ${line} 2> /dev/null \
+        | python -mjson.tool 2> /dev/null \
+        | sed -e 's/[ \t]*$//g' >> "$outfile" 2> /dev/null
+    echo -e "\r${i}: Executing ${line}...done"
+}
+
+
+fetchUrl "1" "/fetch"
+fetchUrl "2" "/increase"
+fetchUrl "3" "/fetch"
+fetchUrl "4" "/reset"
+fetchUrl "5" "/fetch"
+
+if ! diff -dur "${expectedDir}" "${actualDir}"; then
+    exit 1
+fi

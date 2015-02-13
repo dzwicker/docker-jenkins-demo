@@ -2,7 +2,6 @@ package demo.endpoints;
 
 import javax.inject.Inject;
 import javax.ws.rs.GET;
-import javax.ws.rs.POST;
 import javax.ws.rs.Path;
 import javax.ws.rs.Produces;
 import javax.ws.rs.core.MediaType;
@@ -40,7 +39,7 @@ public class RestDemoService {
 		);
 	}
 
-	@POST
+	@GET
 	@Path("/increase")
 	@Produces(MediaType.APPLICATION_JSON)
 	@ApiOperation("Fetch and increase the counter value.")
@@ -54,7 +53,7 @@ public class RestDemoService {
 		);
 	}
 
-	@POST
+	@GET
 	@Path("/reset")
 	@Produces(MediaType.TEXT_PLAIN)
 	@ApiOperation("Reset the counter.")

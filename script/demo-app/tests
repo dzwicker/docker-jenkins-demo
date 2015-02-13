@@ -1,0 +1,49 @@
+#!/bin/bash -eu
+
+root="$(cd `dirname $0`/../.. && pwd)"
+container="demo-app"
+
+function log() {
+    echo -e "\n$1\n"
+}
+
+function fail() {
+    log "\033[31m${1}\033[0m"
+    exit 1
+}
+
+function cleanUp(){
+   docker logs $(cat "${root}/${container}.id") &> "${root}/log.txt"
+   docker rm -f $(cat "${root}/${container}.id") > /dev/null
+}
+
+log "\033[34m==>\033[0m \033[1mBuild application \033[0m"
+if ! "${root}/script/demo-app/build"; then
+   fail "Build fail"
+fi
+
+log "\033[34m==>\033[0m \033[1mPackage application \033[0m"
+if ! "${root}/script/demo-app/package"; then
+   fail "Packaging fail"
+fi
+
+log "\033[34m==>\033[0m \033[1mStart application \033[0m"
+if ! "${root}/script/demo-app/start" -d ; then
+   fail "Unable to start application"
+fi
+trap cleanUp INT TERM EXIT KILL
+
+log "\033[34m==>\033[0m \033[1mWait for application to start \033[0m"
+if ! "${root}/script/demo-app/wait"; then
+   fail "Waiting for application failed"
+fi
+
+log "\033[34m==>\033[0m \033[1mRun test \033[0m"
+if ! "${root}/tests/rest/verify"; then
+   log "\033[31m✘  \033[1mFAIL \033[0m"
+   exit 1
+fi
+
+log "\033[32m✔  \033[1mPASS \033[0m"
+
+
