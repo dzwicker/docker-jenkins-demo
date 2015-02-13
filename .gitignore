@@ -12,3 +12,5 @@ gradle-app.setting
 /build/
 */build/
 etc/demo-app/artefacts
+demo-app.id
+log.txt
