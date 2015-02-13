@@ -31,4 +31,6 @@ war {
         from manifestPath
     }
     classpath = classpath - [project.configurations.provided]
+
+    destinationDir = file "${rootDir}/etc/demo-app/artefacts"
 }
