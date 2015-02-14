@@ -1,8 +1,24 @@
 #!/bin/bash -eu
 
+args="$*"
+
+port="8080"
+while getopts :p:u: flag; do
+    case ${flag} in
+        u)
+            path="$OPTARG"
+            ;;
+        p)
+            port="$OPTARG"
+            ;;
+        *)
+            ;;
+    esac
+done
+shift $(( OPTIND - 1 ));
 path=${1-}
-url="http://$(boot2docker ip):8080"
-if [ -n "$path" ]; then
+url="http://$(boot2docker ip):${port}"
+if [ -n "${path}" ]; then
     url="${url}/${path}"
 fi
 open "${url}"
