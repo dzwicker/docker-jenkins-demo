@@ -1,5 +1,7 @@
 #!/bin/bash -eu
 
-root="$(cd `dirname $0`/../.. && pwd)"
+dir=$(dirname $0)
+root="$(cd ${dir}/../.. && pwd)"
+app=${dir##*/}
 
-"${root}/script/.build/publish" "wildfly"
+"${root}/script/.build/publish" "${app}"
