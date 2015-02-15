@@ -25,7 +25,14 @@ RUN \
     curl -L https://get.docker.com/builds/Linux/x86_64/docker-latest -o /usr/bin/docker && \
     chmod +x /usr/bin/docker && \
     addgroup --gid 999 docker && \
+    adduser jenkins users && \
     adduser jenkins docker
+
+COPY plugins.sh /usr/local/bin/plugins.sh
+COPY plugins.txt /usr/share/jenkins/plugins.txt
+RUN /usr/local/bin/plugins.sh /usr/share/jenkins/plugins.txt
+
+COPY conf /usr/share/jenkins/ref
 
 # drop back to the regular jenkins user - good practice
 USER jenkins
@@ -33,11 +40,6 @@ USER jenkins
 RUN \
     git config --global user.email "jenkins@demo.invalid" && \
     git config --global user.name "jenkins"
-
-COPY hudson.model.UpdateCenter.xml /var/jenkins_home/hudson.model.UpdateCenter.xml
-COPY hudson.tasks.Shell.xml /var/jenkins_home/hudson.tasks.Shell.xml
-COPY org.jenkinsci.main.modules.sshd.SSHD.xml /var/jenkins_home/org.jenkinsci.main.modules.sshd.SSHD.xml
-COPY plugins.sh /usr/local/bin/plugins.sh
 
 # jenkins sshd port
 EXPOSE 2222

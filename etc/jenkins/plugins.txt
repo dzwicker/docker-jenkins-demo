@@ -1,0 +1,15 @@
+# nice builds
+ansicolor
+build-name-setter
+description-setter
+modernstatus
+timestamper
+token-macro
+
+# version control
+git
+git-client
+scm-api
+
+# after build
+htmlpublisher
