@@ -4,6 +4,6 @@ dir=$(dirname $0)
 root="$(cd ${dir}/../.. && pwd)"
 app=${dir##*/}
 
-"${root}/script/.build/start" -c "${app}" \
+"${root}/scripts/.build/start" -c "${app}" \
     -v "/var/run/docker.sock:/var/run/docker.sock" \
     -e "JAVA_OPTS=-Dfile.encoding=UTF-8" "$*"

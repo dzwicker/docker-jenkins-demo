@@ -4,4 +4,4 @@ dir=$(dirname $0)
 root="$(cd ${dir}/../.. && pwd)"
 app=${dir##*/}
 
-"${root}/script/.build/package" "${app}"
+"${root}/scripts/.build/package" "${app}"

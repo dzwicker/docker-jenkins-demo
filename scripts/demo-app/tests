@@ -18,23 +18,23 @@ function cleanUp(){
 }
 
 log "\033[34m==>\033[0m \033[1mBuild application \033[0m"
-if ! "${root}/script/demo-app/build"; then
+if ! "${root}/scripts/demo-app/build"; then
    fail "Build fail"
 fi
 
 log "\033[34m==>\033[0m \033[1mPackage application \033[0m"
-if ! "${root}/script/demo-app/package"; then
+if ! "${root}/scripts/demo-app/package"; then
    fail "Packaging fail"
 fi
 
 log "\033[34m==>\033[0m \033[1mStart application \033[0m"
-if ! "${root}/script/demo-app/start" -d ; then
+if ! "${root}/scripts/demo-app/start" -d ; then
    fail "Unable to start application"
 fi
 trap cleanUp INT TERM EXIT KILL
 
 log "\033[34m==>\033[0m \033[1mWait for application to start \033[0m"
-if ! "${root}/script/demo-app/wait"; then
+if ! "${root}/scripts/demo-app/wait"; then
    fail "Waiting for application failed"
 fi
 

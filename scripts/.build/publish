@@ -5,7 +5,7 @@ test -n "$1" || (echo "parameter <container> is missing" && exit 1)
 root="$(cd `dirname $0`/../.. && pwd)"
 container=$1
 
-version_tag="dzwicker/${container}:$(cat "${root}/script/.build/version")"
+version_tag="dzwicker/${container}:$(cat "${root}/scripts/.build/version")"
 latest_tag="dzwicker/${container}:latest"
 
 docker push "${version_tag}"

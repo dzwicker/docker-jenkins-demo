@@ -31,7 +31,7 @@ while getopts :dnv:e:c: flag; do
 done
 shift $(( OPTIND - 1 ));
 
-version_tag="dzwicker/${container}:$(cat "${root}/script/.build/version")"
+version_tag="dzwicker/${container}:$(cat "${root}/scripts/.build/version")"
 
 command="docker run --net=host"
 
