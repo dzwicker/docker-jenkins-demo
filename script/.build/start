@@ -8,7 +8,7 @@ args="$*"
 
 detach=false
 name=false
-while getopts :dnv:c: flag; do
+while getopts :dnv:e:c: flag; do
     case ${flag} in
         c)
             container="$OPTARG"
@@ -21,6 +21,9 @@ while getopts :dnv:c: flag; do
             ;;
         v)
             volume="$OPTARG"
+            ;;
+        e)
+            environment="$OPTARG"
             ;;
         *)
             ;;
@@ -36,6 +39,9 @@ if ${detach}; then
     command="${command} -d"
 else
     command="${command} -ti"
+fi
+if [ -n "${environment}" ]; then
+    command="${command} -e ${environment}"
 fi
 if [ -n "${volume}" ]; then
     command="${command} -v ${volume}"
