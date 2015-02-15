@@ -2,9 +2,17 @@
 
 root="$(cd `dirname $0`/../.. && pwd)"
 
+url="http://"
+if boot2docker ip > /dev/null; then
+    url="${url}$(boot2docker ip)"
+else
+    url="${url}127.0.0.1"
+fi
+url="${url}:8080/api/v1/system/version"
+
+echo "URL: ${url}"
 for i in {1..60}; do
-    response=$(curl -4 -H "Accept: application/json" --write-out %{http_code} --silent --output /dev/null "http://$(boot2docker ip):8080/api/v1/system/version")
-#    echo "Return code: ${response}"
+    response=$(curl -4 -H "Accept: application/json" --write-out %{http_code} --silent --output /dev/null ${url})
     echo -n .
     if [ ${response} == 200 ]; then
         exit 0
