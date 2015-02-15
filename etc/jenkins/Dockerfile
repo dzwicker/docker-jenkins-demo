@@ -11,9 +11,18 @@ RUN \
     echo oracle-java8-installer shared/accepted-oracle-license-v1-1 select true | /usr/bin/debconf-set-selections && \
     apt-key adv --keyserver hkp://keyserver.ubuntu.com:80 --recv-keys EEA14886 && \
     apt-get update -y && \
-    apt-get install -y git oracle-java8-installer oracle-java8-set-default iptables && \
+    apt-get install -y locales bsdmainutils bc git oracle-java8-installer oracle-java8-set-default iptables && \
     apt-get clean && \
     rm -rf /var/lib/apt/lists/* /tmp/* /var/tmp/*
+
+######### Set locale to UTF-8 ###################
+# Configure timezone
+RUN echo "Europe/Berlin" > /etc/timezone
+RUN DEBIAN_FRONTEND=noninteractive dpkg-reconfigure tzdata
+
+# Configure locale
+RUN export LANGUAGE=en_US.UTF-8 && export LANG=en_US.UTF-8 && export LC_ALL=en_US.UTF-8
+RUN locale-gen en_US.UTF-8 && DEBIAN_FRONTEND=noninteractive dpkg-reconfigure locales
 
 RUN \
     mkdir -p /home/jenkins && \
@@ -25,7 +34,14 @@ RUN \
     curl -L https://get.docker.com/builds/Linux/x86_64/docker-latest -o /usr/bin/docker && \
     chmod +x /usr/bin/docker && \
     addgroup --gid 999 docker && \
+    adduser jenkins users && \
     adduser jenkins docker
+
+COPY plugins.sh /usr/local/bin/plugins.sh
+COPY plugins.txt /usr/share/jenkins/plugins.txt
+RUN /usr/local/bin/plugins.sh /usr/share/jenkins/plugins.txt
+
+COPY conf /usr/share/jenkins/ref
 
 # drop back to the regular jenkins user - good practice
 USER jenkins
@@ -33,11 +49,6 @@ USER jenkins
 RUN \
     git config --global user.email "jenkins@demo.invalid" && \
     git config --global user.name "jenkins"
-
-COPY hudson.model.UpdateCenter.xml /var/jenkins_home/hudson.model.UpdateCenter.xml
-COPY hudson.tasks.Shell.xml /var/jenkins_home/hudson.tasks.Shell.xml
-COPY org.jenkinsci.main.modules.sshd.SSHD.xml /var/jenkins_home/org.jenkinsci.main.modules.sshd.SSHD.xml
-COPY plugins.sh /usr/local/bin/plugins.sh
 
 # jenkins sshd port
 EXPOSE 2222

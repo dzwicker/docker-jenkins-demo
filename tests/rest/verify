@@ -2,7 +2,15 @@
 
 root="$(cd `dirname $0`/../.. && pwd)"
 
-url="http://$(boot2docker ip):8080/api/v1/demo"
+url="http://"
+if boot2docker ip > /dev/null; then
+    url="${url}$(boot2docker ip)"
+else
+    url="${url}127.0.0.1"
+fi
+url="${url}:8080/api/v1/demo"
+
+echo "URL: ${url}"
 restDir="${root}/tests/rest"
 
 expectedDir="${restDir}/expected"
@@ -19,7 +27,7 @@ function fetchUrl() {
 
     echo -n "${i}: Executing ${line}..."
 
-    echo "$line" > "$outfile"
+    echo "$line" | sed -e 's/http*:\/\/[^\/]*\//$host\//g' > "$outfile"
 
     eval ${line} 2> /dev/null \
         | python -mjson.tool 2> /dev/null \

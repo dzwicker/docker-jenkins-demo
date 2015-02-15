@@ -1,4 +1,4 @@
-#!/bin/bash -eu
+#!/bin/bash -e
 
 test -n "$1" || (echo "parameter <container> is missing" && exit 1)
 
@@ -7,13 +7,23 @@ root="$(cd `dirname $0`/../.. && pwd)"
 args="$*"
 
 detach=false
-while getopts :dc: flag; do
+name=false
+while getopts :dnv:e:c: flag; do
     case ${flag} in
         c)
             container="$OPTARG"
             ;;
         d)
             detach=true
+            ;;
+        n)
+            name=true
+            ;;
+        v)
+            volume="$OPTARG"
+            ;;
+        e)
+            environment="$OPTARG"
             ;;
         *)
             ;;
@@ -23,9 +33,29 @@ shift $(( OPTIND - 1 ));
 
 version_tag="dzwicker/${container}:$(cat "${root}/script/.build/version")"
 
+command="docker run --net=host"
+
 if ${detach}; then
-    id=$(docker run -d --net=host ${version_tag})
+    command="${command} -d"
+else
+    command="${command} -ti"
+fi
+if [ -n "${environment}" ]; then
+    command="${command} -e ${environment}"
+fi
+if [ -n "${volume}" ]; then
+    command="${command} -v ${volume}"
+fi
+if ${name}; then
+    command="${command} --name=${container}"
+fi
+
+command="${command} ${version_tag}"
+
+echo "${command}"
+if ${detach}; then
+    id=$(${command})
     echo ${id} > "${root}/${container}.id"
 else
-    docker run -ti --net=host ${version_tag}
+    ${command}
 fi
