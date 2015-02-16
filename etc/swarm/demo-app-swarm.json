@@ -1,0 +1,16 @@
+{
+  "app_name": "demo-app",
+  "services": [
+    {
+      "service_name": "demo-app-service",
+      "components": [
+        {
+          "component_name": "demo-app",
+          "image": "dzwicker/demo-app:latest",
+          "ports": ["8080/tcp"],
+          "domains": {"demo-app-dzwicker.gigantic.io": "8080"}
+        }
+      ]
+    }
+  ]
+}
