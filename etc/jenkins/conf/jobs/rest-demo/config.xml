@@ -14,9 +14,6 @@
             <taskName>build</taskName>
             <stageName>Build | Package | Test</stageName>
         </se.diabol.jenkins.pipeline.PipelineProperty>
-        <com.sonyericsson.rebuild.RebuildSettings plugin="rebuild@1.22">
-            <autoRebuild>true</autoRebuild>
-        </com.sonyericsson.rebuild.RebuildSettings>
     </properties>
     <scm class="hudson.plugins.git.GitSCM" plugin="git@2.3.4">
         <configVersion>2</configVersion>
