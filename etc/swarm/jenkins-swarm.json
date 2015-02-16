@@ -1,0 +1,19 @@
+{
+  "app_name": "jenkins",
+  "services": [
+    {
+      "service_name": "demo-app-service",
+      "components": [
+        {
+          "component_name": "jenkins",
+          "image": "dzwicker/jenkins:latest",
+          "env": {
+            "JAVA_OPTS": "-Dfile.encoding=UTF-8"
+          },
+          "ports": ["8888/tcp"],
+          "domains": {"jenkins-dzwicker.gigantic.io": "8888"}
+        }
+      ]
+    }
+  ]
+}
