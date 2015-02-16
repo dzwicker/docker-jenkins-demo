@@ -9,12 +9,7 @@
         <artifactNumToKeep>-1</artifactNumToKeep>
     </logRotator>
     <keepDependencies>false</keepDependencies>
-    <properties>
-        <se.diabol.jenkins.pipeline.PipelineProperty plugin="delivery-pipeline-plugin@0.8.9">
-            <taskName>build</taskName>
-            <stageName>Build | Package | Test</stageName>
-        </se.diabol.jenkins.pipeline.PipelineProperty>
-    </properties>
+    <properties/>
     <scm class="hudson.plugins.git.GitSCM" plugin="git@2.3.4">
         <configVersion>2</configVersion>
         <userRemoteConfigs>
