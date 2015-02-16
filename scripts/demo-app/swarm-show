@@ -1,0 +1,8 @@
+#!/bin/bash -eu
+
+dir=$(dirname $0)
+root="$(cd ${dir}/../.. && pwd)"
+app=${dir##*/}
+
+open "http://${app}-dzwicker.gigantic.io"
+open "http://${app}-dzwicker.gigantic.io/api/doc"

@@ -1,0 +1,7 @@
+#!/bin/bash -eu
+
+dir=$(dirname $0)
+root="$(cd ${dir}/../.. && pwd)"
+app=${dir##*/}
+
+swarm -v up ${root}/etc/swarm/${app}-swarm.json
