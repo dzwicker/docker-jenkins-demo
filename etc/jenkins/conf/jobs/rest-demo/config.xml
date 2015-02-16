@@ -42,7 +42,7 @@
     <concurrentBuild>false</concurrentBuild>
     <builders>
         <hudson.tasks.Shell>
-            <command>./script/demo-app/tests</command>
+            <command>./scripts/demo-app/tests</command>
         </hudson.tasks.Shell>
     </builders>
     <publishers>
