@@ -16,9 +16,10 @@ while getopts :p:u: flag; do
     esac
 done
 shift $(( OPTIND - 1 ));
-path=${1-}
+
 url="http://$(boot2docker ip):${port}"
-if [ -n "${path}" ]; then
+if [ "x${path}" != "x" ]; then
     url="${url}/${path}"
 fi
+echo "${url}"
 open "${url}"
