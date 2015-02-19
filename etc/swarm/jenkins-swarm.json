@@ -2,7 +2,7 @@
   "app_name": "jenkins",
   "services": [
     {
-      "service_name": "demo-app-service",
+      "service_name": "jenkins-service",
       "components": [
         {
           "component_name": "jenkins",
