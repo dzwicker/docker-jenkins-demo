@@ -4,4 +4,5 @@ dir=$(dirname $0)
 root="$(cd ${dir}/../.. && pwd)"
 app=${dir##*/}
 
-swarm -v up ${root}/etc/swarm/${app}-swarm.json
+echo "swarm -v up \"${root}/etc/swarm/${app}-swarm.json\""
+swarm -v up "${root}/etc/swarm/${app}-swarm.json"

@@ -4,5 +4,8 @@ dir=$(dirname $0)
 root="$(cd ${dir}/../.. && pwd)"
 app=${dir##*/}
 
+echo "open \"http://${app}-dzwicker.gigantic.io\""
 open "http://${app}-dzwicker.gigantic.io"
+
+echo "open \"http://${app}-dzwicker.gigantic.io/api/doc\""
 open "http://${app}-dzwicker.gigantic.io/api/doc"
