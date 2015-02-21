@@ -1,5 +1,5 @@
 FROM dockerfile/java:oracle-java8
-MAINTAINER daniel.zwicker@in2experience.com
+MAINTAINER email@daniel-zwicker.de
 
 # Set the env variable DEBIAN_FRONTEND to noninteractive
 ENV DEBIAN_FRONTEND noninteractive

@@ -1,4 +1,5 @@
 FROM jenkins:latest
+MAINTAINER email@daniel-zwicker.de
 
 # if we want to install via apt
 USER root

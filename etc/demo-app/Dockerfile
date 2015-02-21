@@ -1,4 +1,4 @@
 FROM dzwicker/wildfly:1.0.0
-MAINTAINER daniel.zwicker@in2experience.com
+MAINTAINER email@daniel-zwicker.de
 
 ADD artefacts $JBOSS_HOME/standalone/deployments
